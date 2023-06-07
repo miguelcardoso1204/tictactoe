@@ -1,0 +1,41 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+}
+
+#title {
+}
+
+#title h3 {
+    color: white;
+    text-align: center;
+    font-size: 90px;
+    line-height: 30px;
+}
+
+#gameboard {
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    grid-gap: 5px;
+    background-color: white;
+    border: 5px solid white;
+}
+
+.square {
+    background-color: black;
+}
