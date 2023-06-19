@@ -61,7 +61,7 @@ body {
 }
 
 #menu {
-    display: none;
+    display: flex;
     flex-direction: column;
     position: absolute;
     z-index: 1;
@@ -77,9 +77,6 @@ body {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 600;
-}
-
-#menu div {
 }
 
 #menu div:has(input[type="text"]) {
@@ -98,6 +95,7 @@ input[type="text"] {
 
 form {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
