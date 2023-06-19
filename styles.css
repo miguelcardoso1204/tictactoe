@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+
 html,
 body {
     margin: 0;
@@ -13,17 +15,23 @@ body {
     height: 100vh;
     align-items: center;
     justify-content: space-between;
-    background-color: black;
+    background-color: white;
+    font-family: Pangolin;
 }
 
 #title {
 }
 
 #title h3 {
-    color: white;
+    color: black;
     text-align: center;
     font-size: 90px;
     line-height: 30px;
+    margin-top: 70px;
+}
+
+.displayTurn {
+    font-size: 26px;
 }
 
 #gameboard {
@@ -32,10 +40,81 @@ body {
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: repeat(3, 150px);
     grid-gap: 5px;
-    background-color: white;
-    border: 5px solid white;
+    background-color: black;
+    border: 5px solid black;
 }
 
 .square {
+    background-color: white;
+    font-size: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    font-size: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+}
+
+#menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border: 5px solid black;
+    height: 400px;
+    width: 300px;
+    top: calc(50% - 250px);
+    padding: 30px;
+}
+
+#menu h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#menu div {
+}
+
+#menu div:has(input[type="text"]) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 16px 0;
+}
+input[type="text"] {
+    background-color: lightgray;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 6px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.radioButtons {
+    margin-top: 20px;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 120px;
+    height: 46px;
     background-color: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin: auto auto 0 auto;
 }
