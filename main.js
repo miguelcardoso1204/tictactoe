@@ -26,5 +26,21 @@ form.addEventListener("submit", (event) => {
 
     document.querySelector("#menu").style.display = "none";
 
-    console.log(data);
+    initializeGame(data);
 });
+
+const initializeVariables = (data) => {
+    data.gamemode = +data.gamemode;
+    data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    data.player1 = "X";
+    data.player2 = "0";
+    data.round = 0;
+    data.currentPlayer = "X";
+    data.gameOver = "false";
+};
+
+const initializeGame = (data) => {
+    //initialize game variables
+    initializeVariables(data);
+    //add event listeners to the game
+};
