@@ -36,11 +36,43 @@ const initializeVariables = (data) => {
     data.player2 = "0";
     data.round = 0;
     data.currentPlayer = "X";
-    data.gameOver = "false";
+    data.gameOver = false;
+};
+
+const addEventListenerToGameboard = (data) => {
+    document.querySelectorAll(".square").forEach((square) => {
+        square.addEventListener("click", (event) => {
+            playMove(event.target, data);
+        });
+    });
 };
 
 const initializeGame = (data) => {
     //initialize game variables
     initializeVariables(data);
-    //add event listeners to the game
+    //add event listeners to the gameboard
+    addEventListenerToGameboard(data);
+};
+
+const playMove = (square, data) => {
+    //is game  over? if game over, don't do anything
+
+    if (data.gameOver || data.round > 8) {
+        return;
+    }
+    //check if game box has a letter in it, if so, don't do anything
+    if (data.board[square.id] === "X" || data.board[square.id] === "O") {
+        console.log(data, square);
+        return;
+    }
+
+    //adjust the DOM for player move
+    data.board[square.id] = data.currentPlayer;
+    square.textContent = data.currentPlayer;
+    square.classList.add(data.currentPlayer === "X" ? "player1" : "player2");
+
+    //increase the round
+    data.round++;
+
+    //check win conditions
 };
