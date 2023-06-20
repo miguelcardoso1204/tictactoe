@@ -87,8 +87,63 @@ const playMove = (square, data) => {
 
     //check win conditions
     if (endConditions(data)) {
-        //adjust DOM to reflect conditions
+        return;
     }
 
-    const endConditions = (data) => {};
+    //change current player
+
+    //change the dom and change data.currentPlayer
+
+    changePlayer(data);
+};
+
+const endConditions = (data) => {
+    //3 potential options,
+    //winner
+    //tie
+    //game not over yet
+    if (checkWinner(data)) {
+        //adjust DOM to reflect win
+        let winTextContent =
+            data.currentPlayer === "X"
+                ? data.player1name + " won the game!"
+                : data.player2name + " won the game!";
+        adjustDOM("displayTurn", winTextContent);
+        return true;
+    } else if (data.round === 9) {
+        //adjust DOM to reflect tie
+        adjustDOM("displayTurn", "The game was a tie");
+        data.gameOver = true;
+        return true;
+    }
+    return false;
+};
+
+const checkWinner = (data) => {
+    let result = false;
+    winningConditions.forEach((condition) => {
+        if (
+            data.board[condition[0]] === data.board[condition[1]] &&
+            data.board[condition[1]] === data.board[condition[2]]
+        ) {
+            data.gameOver = true;
+            result = true;
+        }
+    });
+
+    return result;
+};
+
+const adjustDOM = (className, textContent) => {
+    const elem = document.querySelector(`.${className}`);
+    elem.setAttribute("display", "block");
+    elem.textContent = textContent;
+};
+
+const changePlayer = (data) => {
+    data.currentPlayer = data.currentPlayer === "X" ? "O" : "X";
+    //Adjust DOM
+    let displayTurnText =
+        data.currentPlayer === "X" ? data.player1name : data.player2name;
+    adjustDOM("displayTurn", `${displayTurnText}'s turn`);
 };
