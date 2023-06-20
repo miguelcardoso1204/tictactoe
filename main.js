@@ -14,6 +14,17 @@
 
 // human vs human, next implement easy ai, next impossible ai
 
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+];
+
 const form = document.querySelector("#settings");
 
 form.addEventListener("submit", (event) => {
@@ -75,4 +86,9 @@ const playMove = (square, data) => {
     data.round++;
 
     //check win conditions
+    if (endConditions(data)) {
+        //adjust DOM to reflect conditions
+    }
+
+    const endConditions = (data) => {};
 };
