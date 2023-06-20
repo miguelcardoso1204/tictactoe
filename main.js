@@ -44,7 +44,7 @@ const initializeVariables = (data) => {
     data.gamemode = +data.gamemode;
     data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     data.player1 = "X";
-    data.player2 = "0";
+    data.player2 = "O";
     data.round = 0;
     data.currentPlayer = "X";
     data.gameOver = false;
@@ -60,6 +60,7 @@ const addEventListenerToGameboard = (data) => {
 
 const initializeGame = (data) => {
     //initialize game variables
+    adjustDOM("displayTurn", `${data.player1name}'s turn`);
     initializeVariables(data);
     //add event listeners to the gameboard
     addEventListenerToGameboard(data);
@@ -93,8 +94,14 @@ const playMove = (square, data) => {
     //change current player
 
     //change the dom and change data.currentPlayer
-
-    changePlayer(data);
+    if (data.gamemode === 0) {
+        changePlayer(data);
+    } else if (data.gamemode === 1) {
+        //easy ai
+        easyAIMove(data);
+        data.currentPlayer = "X";
+        //change back to player1
+    }
 };
 
 const endConditions = (data) => {
@@ -104,6 +111,7 @@ const endConditions = (data) => {
     //game not over yet
     if (checkWinner(data)) {
         //adjust DOM to reflect win
+        console.log(data.player2name);
         let winTextContent =
             data.currentPlayer === "X"
                 ? data.player1name + " won the game!"
@@ -126,6 +134,7 @@ const checkWinner = (data) => {
             data.board[condition[0]] === data.board[condition[1]] &&
             data.board[condition[1]] === data.board[condition[2]]
         ) {
+            console.log("game over");
             data.gameOver = true;
             result = true;
         }
@@ -146,4 +155,25 @@ const changePlayer = (data) => {
     let displayTurnText =
         data.currentPlayer === "X" ? data.player1name : data.player2name;
     adjustDOM("displayTurn", `${displayTurnText}'s turn`);
+};
+
+const easyAIMove = (data) => {
+    changePlayer(data);
+    setTimeout(() => {
+        let availableSpaces = data.board.filter(
+            (space) => space !== "X" && space !== "O"
+        );
+        let move =
+            availableSpaces[Math.floor(Math.random() * availableSpaces.length)];
+        data.board[move] = data.player2;
+        let square = document.getElementById(`${move}`);
+        square.textContent = data.player2;
+        square.classList.add("player2");
+        data.round++;
+    }, 300);
+    if (endConditions(data)) {
+        return;
+    }
+
+    changePlayer(data);
 };
